@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e921468c-2b8c-4200-98b9-dac1eb7d2635"
+      }
+    },
+    "owner": "davidtaylor001"
   }
 }

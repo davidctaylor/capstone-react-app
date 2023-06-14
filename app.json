@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "dtaylor-native-capstone",
-    "slug": "dtaylor-native-capstone",
+    "name": "little-lemon",
+    "slug": "little-lemon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,11 +26,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "e921468c-2b8c-4200-98b9-dac1eb7d2635"
-      }
-    },
-    "owner": "davidtaylor001"
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
   }
 }

@@ -24,7 +24,7 @@ export const LabelInput = (props: LabelInputProps) => {
         <MaskedTextInput
           style={styles.input}
           autoCapitalize={'none'}
-          clearButtonMode={'always'}
+          clearButtonMode={'while-editing'}
           mask={props.mask}
           onChangeText={(_formatted, extracted) => props.onChangeText(extracted)}
           keyboardType={(props.keyboardType ? props.keyboardType : 'default')}>
@@ -35,7 +35,7 @@ export const LabelInput = (props: LabelInputProps) => {
           style={styles.input}
           value={props.value}
           onChangeText={props.onChangeText}
-          clearButtonMode={'always'}
+          clearButtonMode={'while-editing'}
           keyboardType={(props.keyboardType ? props.keyboardType : 'default')}
         />
       )}

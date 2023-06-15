@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { ApplicationState, UserProfile, UserNotificationsOptions } from '@interfaces';
 import { AvatarManager, LabelCheckbox, LabelInput } from '@components/ui';
-import { AVATAR_LABEL } from '@utils';
+import { AVATAR_LABEL, useValidateUser } from '@utils';
 import { STYLE_BUTTON, THEME } from '@styles';
 
 export const ProfileScreen = (props: ApplicationState) => {
@@ -21,7 +21,8 @@ export const ProfileScreen = (props: ApplicationState) => {
   const updateNotifications = (option: UserNotificationsOptions, enabled: boolean) => {
     setUserProfile({...userProfile, notifications: {...userProfile.notifications, [option]: !enabled}});
   }
-  const activeUserProfile: UserProfile = {...props}
+  const [isValidUser] = useValidateUser({emailAddress: userProfile.emailAddress, firstName: userProfile.firstName});
+  const activeUserProfile: UserProfile = {...props};
 
   if (!userProfile) {
     return;
@@ -64,7 +65,9 @@ export const ProfileScreen = (props: ApplicationState) => {
               <Text style={[STYLE_BUTTON.buttonText]}>Discard changes</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[STYLE_BUTTON.button, styles.button, styles.buttonRow, styles.buttonSave]}
+              disabled={!isValidUser}
+              style={[STYLE_BUTTON.button, styles.button, styles.buttonRow, styles.buttonSave, !isValidUser ? styles.buttonDisabled : {}]}
+              // style={[STYLE_BUTTON.button, styles.button, styles.buttonRow, styles.buttonSave]}
               onPress={() => {
                 props.updateUserProfile(userProfile)
                 }}>

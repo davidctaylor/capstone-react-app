@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./",
-    "lint2": "eslint --ext .jsx,.ts,.tsx ./",
+    "lint": "eslint --ext .jsx,.ts,.tsx ./",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",

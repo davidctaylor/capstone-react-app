@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   ActivityIndicator,
   SafeAreaView,
-  View,
+  Text,
 } from 'react-native';
 import { THEME } from '@styles';
-import { Header } from '@components/ui';
 
 export const SplashScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
-      <ActivityIndicator style={styles.activity} size="large" color={THEME.colors.primaryMain}/>
+      <Text style={styles.titleText}>Little Lemon Restaurant</Text>
+      <ActivityIndicator size="large" color={THEME.colors.primaryMain}/>
     </SafeAreaView>
   );
 }
@@ -21,16 +20,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: THEME.colors.highlightLight,
-  },
-  activity: {
-    flex: 1,
-    alignSelf: 'center',
+    justifyContent: 'center',
   },
   titleText: {
-    fontSize: 30,
-    paddingTop: 50,
-    paddingBottom: 40,
-    paddingLeft: 0,
+    color: THEME.colors.primaryMain,
+    fontSize: THEME.typography.fontSize32,
+    fontFamily: THEME.typography.fontFamilyHighlight,
     textAlign: 'center',
   },
 });

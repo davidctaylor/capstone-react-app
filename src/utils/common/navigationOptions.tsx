@@ -32,7 +32,7 @@ interface HeaderProps {
     headerTitle: () => (
       <Image
         style={{height: 40, width: 160}}
-        source={require('../../assets/images/Logo.png')}
+        source={require('../../../assets/images/Logo.png')}
         resizeMode='contain'
         accessible={true}
         accessibilityLabel={'Little Lemon Logo'}/>

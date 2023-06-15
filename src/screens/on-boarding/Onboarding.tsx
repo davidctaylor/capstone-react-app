@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -10,22 +10,12 @@ import {
 } from 'react-native';
 import { LabelInput } from '@components/ui';
 import { STYLE_BUTTON, THEME } from '@styles';
-import { VALID_EMAIL_ADDRESS } from '@utils';
-
-const FirstNameRegex = /^[A-Za-z]+$/g;
+import { useValidateUser } from '@utils';
 
 export const OnboardingScreen = (props: {setOnboardingState: (email: string, firstName: string) => void}) => {
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
-  const [formValid, setFormValid] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (VALID_EMAIL_ADDRESS(emailAddress) && firstName.length > 0 && firstName.match(FirstNameRegex) !== null) {
-      setFormValid(true);
-    } else {
-      setFormValid(false);
-    }
-  });
+  const [isValidUser] = useValidateUser({emailAddress: emailAddress, firstName: firstName});
   
   return (
     <KeyboardAvoidingView
@@ -38,12 +28,12 @@ export const OnboardingScreen = (props: {setOnboardingState: (email: string, fir
           <LabelInput label='First name' value={firstName} onChangeText={(text: string) => setFirstName(text)}/>
           <LabelInput label='Email' value={emailAddress} keyboardType={'email-address'} onChangeText={(text: string) => setEmailAddress(text)}/>
           <TouchableOpacity
-            disabled={!formValid}
-            style={[STYLE_BUTTON.button, styles.button, !formValid ? styles.buttonDisabled : {}]}
+            disabled={!isValidUser}
+            style={[STYLE_BUTTON.button, styles.button, !isValidUser ? styles.buttonDisabled : {}]}
             onPress={() => {
               props.setOnboardingState(emailAddress, firstName);
             }}>
-            <Text style={[STYLE_BUTTON.buttonText, !formValid ? styles.buttonTextDisabled : {}]}>Next</Text>
+            <Text style={[STYLE_BUTTON.buttonText, !isValidUser ? styles.buttonTextDisabled : {}]}>Next</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

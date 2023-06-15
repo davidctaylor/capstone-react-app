@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts, Karla_400Regular, Karla_500Medium } from '@expo-google-fonts/karla';
@@ -54,7 +53,7 @@ const App = () => {
 
   const logout = async() => {
     try {
-      const values = await AsyncStorage.multiRemove(Object.keys(applicationState));
+      await AsyncStorage.multiRemove(Object.keys(applicationState));
       setApplicationState({...DEFAULT_APP_STATE, isLoading: false});
     } catch (e) {
       console.log('remove error', e);
@@ -66,8 +65,8 @@ const App = () => {
       try {
         const values = await AsyncStorage.multiGet(Object.keys(applicationState));
         const initialState: ApplicationState = values.reduce((acc: ApplicationState, curr: KeyValuePair) => {
-          let val: boolean | object | null  = curr[1] ? JSON.parse(curr[1]) : null;
-          if (val) {
+          const val: boolean | object | null  = curr[1] ? JSON.parse(curr[1]) : null;
+          if (curr[0] !== 'isLoading' && val !== null) {
             acc[curr[0]] = val;  
           }
           

@@ -11,10 +11,10 @@ export const SplashScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.titleText}>Little Lemon Restaurant</Text>
-      <ActivityIndicator size="large" color={THEME.colors.primaryMain}/>
+      <ActivityIndicator size="large" color={THEME.colors.primaryMain} />
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

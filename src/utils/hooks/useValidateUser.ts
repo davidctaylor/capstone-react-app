@@ -4,13 +4,18 @@ import { useEffect, useState } from 'react';
 const VALIDATE_EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 const VALIDATE_FIRST_NAMEREGEX = /^[A-Za-z]+$/g;
 
- export const useValidateUser = (user: {emailAddress: string, firstName: string}) => {
+export const useValidateUser = (user: {
+  emailAddress: string;
+  firstName: string;
+}) => {
   const [isUserValid, setUserValid] = useState<boolean>(false);
 
   useEffect(() => {
-    if (user.emailAddress.match(VALIDATE_EMAIL_REGEX) !== null &&
+    if (
+      user.emailAddress.match(VALIDATE_EMAIL_REGEX) !== null &&
       user.firstName.length > 0 &&
-      user.firstName.match(VALIDATE_FIRST_NAMEREGEX) !== null) {
+      user.firstName.match(VALIDATE_FIRST_NAMEREGEX) !== null
+    ) {
       setUserValid(true);
     } else {
       setUserValid(false);
@@ -18,4 +23,4 @@ const VALIDATE_FIRST_NAMEREGEX = /^[A-Za-z]+$/g;
   }, [user]);
 
   return [isUserValid];
-}
+};

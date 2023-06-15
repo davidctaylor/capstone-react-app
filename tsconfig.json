@@ -26,8 +26,8 @@
       "@interfaces/*": ["./src/interfaces/*"],
       "@screens/*": ["./src/screens/*"],
       "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"],
-    },
+      "@utils/*": ["./src/utils/*"]
+    }
   },
   "include": ["src/**/*", "./App.tsx"],
   "exclude": ["node_modules"]

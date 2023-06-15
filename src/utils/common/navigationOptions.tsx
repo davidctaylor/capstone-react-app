@@ -21,30 +21,45 @@ interface HeaderProps {
   onChangeAvatarImage: (uri: string | null) => void;
 }
 
- export const navigationOptions = (path: string, props: HeaderProps) => {
+export const navigationOptions = (path: string, props: HeaderProps) => {
   return {
-    ...(path !== 'onboarding' && {headerLeft: () => (
-      <TouchableOpacity
-        style={[]}>
-        <Ionicons name="md-arrow-back-circle-sharp" size={42} color={THEME.colors.primaryMain} />
-      </TouchableOpacity>)
-      }),
+    ...(path !== 'onboarding' && {
+      headerLeft: () => (
+        <TouchableOpacity style={[]}>
+          <Ionicons
+            name="md-arrow-back-circle-sharp"
+            size={42}
+            color={THEME.colors.primaryMain}
+          />
+        </TouchableOpacity>
+      ),
+    }),
     headerTitle: () => (
       <Image
-        style={{height: 40, width: 160}}
+        style={{ height: 40, width: 160 }}
         source={require('../../../assets/images/Logo.png')}
-        resizeMode='contain'
+        resizeMode="contain"
         accessible={true}
-        accessibilityLabel={'Little Lemon Logo'}/>
+        accessibilityLabel={'Little Lemon Logo'}
+      />
     ),
-    ...(path !== 'onboarding' && {headerRight: () => (
-      <TouchableOpacity
-        style={[STYLE_BUTTON.button, styles.buttonAvatar]}>
-        {props.avatarImageUri ? 
-          (<Image source={{ uri: props.avatarImageUri }} style={[STYLE_BUTTON.button, styles.buttonAvatar]}/>) : 
-          (<Text style={[STYLE_BUTTON.buttonText, STYLE_BUTTON.buttonTextPrimary]}>{props.avatarLabel}</Text>)
-        }
-      </TouchableOpacity>)
+    ...(path !== 'onboarding' && {
+      headerRight: () => (
+        <TouchableOpacity style={[STYLE_BUTTON.button, styles.buttonAvatar]}>
+          {props.avatarImageUri ? (
+            <Image
+              source={{ uri: props.avatarImageUri }}
+              style={[STYLE_BUTTON.button, styles.buttonAvatar]}
+            />
+          ) : (
+            <Text
+              style={[STYLE_BUTTON.buttonText, STYLE_BUTTON.buttonTextPrimary]}
+            >
+              {props.avatarLabel}
+            </Text>
+          )}
+        </TouchableOpacity>
+      ),
     }),
   };
-}
+};

@@ -2,11 +2,11 @@ export enum UserNotificationsOptions {
   OrderStatus = 'Order statuses',
   PasswordChange = 'Password changes',
   SpecialOffers = 'Special offers',
-  Newsletter = 'Newsletter'
+  Newsletter = 'Newsletter',
 }
 
 export interface UserProfile {
-  avatarImageUri: string | null,
+  avatarImageUri: string | null;
   emailAddress: string;
   firstName: string;
   lastName: string;

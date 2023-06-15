@@ -5,7 +5,7 @@ import { useRef, useEffect, EffectCallback } from 'react';
  * @param {Function} effect
  * @param {Array<any>} dependencies
  */
- export const useUpdateEffect = (effect: EffectCallback, dependencies = []) => {
+export const useUpdateEffect = (effect: EffectCallback, dependencies = []) => {
   const isInitialMount = useRef(true);
 
   useEffect(() => {
@@ -15,4 +15,4 @@ import { useRef, useEffect, EffectCallback } from 'react';
       return effect();
     }
   }, dependencies);
-}
+};

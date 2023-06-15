@@ -6,9 +6,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import { ApplicationState, UserProfile, UserNotificationsOptions } from '@interfaces';
+import {
+  ApplicationState,
+  UserProfile,
+  UserNotificationsOptions,
+} from '@interfaces';
 import { AvatarManager, LabelCheckbox, LabelInput } from '@components/ui';
 import { AVATAR_LABEL, useValidateUser } from '@utils';
 import { STYLE_BUTTON, THEME } from '@styles';
@@ -16,69 +20,136 @@ import { STYLE_BUTTON, THEME } from '@styles';
 export const ProfileScreen = (props: ApplicationState) => {
   const [userProfile, setUserProfile] = useState<UserProfile>(props);
   const updateUserProfile = (key: string, val: string | null) => {
-    setUserProfile({...userProfile, [key]: val});
-  }
-  const updateNotifications = (option: UserNotificationsOptions, enabled: boolean) => {
-    setUserProfile({...userProfile, notifications: {...userProfile.notifications, [option]: !enabled}});
-  }
-  const [isValidUser] = useValidateUser({emailAddress: userProfile.emailAddress, firstName: userProfile.firstName});
-  const activeUserProfile: UserProfile = {...props};
+    setUserProfile({ ...userProfile, [key]: val });
+  };
+  const updateNotifications = (
+    option: UserNotificationsOptions,
+    enabled: boolean
+  ) => {
+    setUserProfile({
+      ...userProfile,
+      notifications: { ...userProfile.notifications, [option]: !enabled },
+    });
+  };
+  const [isValidUser] = useValidateUser({
+    emailAddress: userProfile.emailAddress,
+    firstName: userProfile.firstName,
+  });
+  const activeUserProfile: UserProfile = { ...props };
 
   if (!userProfile) {
     return;
   }
 
   const notifications: React.ReactElement[] = [];
-  Object.entries(userProfile && userProfile.notifications).forEach(item => {
-    notifications.push(<LabelCheckbox label={item[0]} value={item[1]} key={item[0]} onChangeChecked={() => updateNotifications(item[0], item[1] as boolean)}/>);
+  Object.entries(userProfile && userProfile.notifications).forEach((item) => {
+    notifications.push(
+      <LabelCheckbox
+        label={item[0]}
+        value={item[1]}
+        key={item[0]}
+        onChangeChecked={() => updateNotifications(item[0], item[1] as boolean)}
+      />
+    );
   });
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}>
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.contentContainer}>
-          <Text style={[styles.regularText, styles.titleText]}>Personal information</Text>
-          <AvatarManager avatarLabel={AVATAR_LABEL(userProfile.firstName, userProfile.lastName)} avatarImageUri={userProfile.avatarImageUri} onChangeAvatarImage={(uri: string | null) => updateUserProfile('avatarImageUri', uri)}/>
-          <LabelInput label='First name' value={userProfile.firstName} onChangeText={(text: string) => updateUserProfile('firstName', text)}/>
-          <LabelInput label='Last name' value={userProfile.lastName} onChangeText={(text: string) => updateUserProfile('lastName', text)}/>
-          <LabelInput label='Email' value={userProfile.emailAddress} onChangeText={(text: string) => updateUserProfile('emailAddress', text)}
-            keyboardType={'email-address'} />
-          <LabelInput label='Phone number' value={userProfile.phoneNumber} 
-            onChangeText={(text: string) => updateUserProfile('phoneNumber', text)}
-            keyboardType={'phone-pad'} mask={'(999)-999-9999'}/>
-          <Text style={[styles.regularText, styles.titleText, styles.titleTextNotification]}>Email notifications</Text>
-          
+          <Text style={[styles.regularText, styles.titleText]}>
+            Personal information
+          </Text>
+          <AvatarManager
+            avatarLabel={AVATAR_LABEL(
+              userProfile.firstName,
+              userProfile.lastName
+            )}
+            avatarImageUri={userProfile.avatarImageUri}
+            onChangeAvatarImage={(uri: string | null) =>
+              updateUserProfile('avatarImageUri', uri)
+            }
+          />
+          <LabelInput
+            label="First name"
+            value={userProfile.firstName}
+            onChangeText={(text: string) =>
+              updateUserProfile('firstName', text)
+            }
+          />
+          <LabelInput
+            label="Last name"
+            value={userProfile.lastName}
+            onChangeText={(text: string) => updateUserProfile('lastName', text)}
+          />
+          <LabelInput
+            label="Email"
+            value={userProfile.emailAddress}
+            onChangeText={(text: string) =>
+              updateUserProfile('emailAddress', text)
+            }
+            keyboardType={'email-address'}
+          />
+          <LabelInput
+            label="Phone number"
+            value={userProfile.phoneNumber}
+            onChangeText={(text: string) =>
+              updateUserProfile('phoneNumber', text)
+            }
+            keyboardType={'phone-pad'}
+            mask={'(999)-999-9999'}
+          />
+          <Text
+            style={[
+              styles.regularText,
+              styles.titleText,
+              styles.titleTextNotification,
+            ]}
+          >
+            Email notifications
+          </Text>
+
           {notifications}
 
           <TouchableOpacity
             style={[STYLE_BUTTON.button, styles.button, styles.buttonLogout]}
-            onPress={props.userLogout}>
+            onPress={props.userLogout}
+          >
             <Text style={[STYLE_BUTTON.buttonText]}>Log out</Text>
           </TouchableOpacity>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[STYLE_BUTTON.button, styles.button, styles.buttonRow]}
-              onPress={() => setUserProfile(activeUserProfile)}>
+              onPress={() => setUserProfile(activeUserProfile)}
+            >
               <Text style={[STYLE_BUTTON.buttonText]}>Discard changes</Text>
             </TouchableOpacity>
             <TouchableOpacity
               disabled={!isValidUser}
-              style={[STYLE_BUTTON.button, styles.button, styles.buttonRow, styles.buttonSave, !isValidUser ? styles.buttonDisabled : {}]}
-              // style={[STYLE_BUTTON.button, styles.button, styles.buttonRow, styles.buttonSave]}
+              style={[
+                STYLE_BUTTON.button,
+                styles.button,
+                styles.buttonRow,
+                styles.buttonSave,
+                !isValidUser ? styles.buttonDisabled : {},
+              ]}
               onPress={() => {
-                props.updateUserProfile(userProfile)
-                }}>
-              <Text style={[STYLE_BUTTON.buttonText, styles.buttonTextSave]}>Save changes</Text>
+                props.updateUserProfile(userProfile);
+              }}
+            >
+              <Text style={[STYLE_BUTTON.buttonText, styles.buttonTextSave]}>
+                Save changes
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -148,5 +219,5 @@ const styles = StyleSheet.create({
   },
   titleTextNotification: {
     paddingBottom: THEME.typography.fontSize17,
-  }
+  },
 });

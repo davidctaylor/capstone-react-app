@@ -14,13 +14,13 @@ export const THEME: Record<string, Record<string, string | number>> = {
   },
   typography: {
     fontFamilyStandard: 'Karla_400Regular',
-    fontFamilyMedium: 'Karla_500Medium' ,
+    fontFamilyMedium: 'Karla_500Medium',
     fontFamilyHighlight: 'MarkaziText_400Regular',
     fontSize32: 32,
     fontSize17: 17,
     fontSize15: 15,
   },
-}
+};
 
 export const STYLE_BUTTON: Record<string, Record<string, string | number>> = {
   button: {
@@ -49,4 +49,4 @@ export const STYLE_BUTTON: Record<string, Record<string, string | number>> = {
   buttonTextPrimary: {
     color: THEME.colors.textWhite,
   },
-}
+};

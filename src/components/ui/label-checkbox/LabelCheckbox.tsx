@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { THEME } from '@styles';
 
@@ -25,7 +21,7 @@ export const LabelCheckbox = (props: LabelCheckboxProps) => {
       <Text style={styles.regularText}>{props.label}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

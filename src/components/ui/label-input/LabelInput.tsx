@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  KeyboardType
-} from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardType } from 'react-native';
 import { MaskedTextInput } from 'react-native-mask-text';
 import { THEME } from '@styles';
 
@@ -25,10 +20,13 @@ export const LabelInput = (props: LabelInputProps) => {
           style={styles.input}
           autoCapitalize={'none'}
           clearButtonMode={'while-editing'}
+          defaultValue={props.value}
           mask={props.mask}
-          onChangeText={(_formatted, extracted) => props.onChangeText(extracted)}
-          keyboardType={(props.keyboardType ? props.keyboardType : 'default')}>
-        </MaskedTextInput>
+          onChangeText={(_formatted, extracted) =>
+            props.onChangeText(extracted)
+          }
+          keyboardType={props.keyboardType ? props.keyboardType : 'default'}
+        ></MaskedTextInput>
       ) : (
         <TextInput
           autoCapitalize={'none'}
@@ -36,12 +34,12 @@ export const LabelInput = (props: LabelInputProps) => {
           value={props.value}
           onChangeText={props.onChangeText}
           clearButtonMode={'while-editing'}
-          keyboardType={(props.keyboardType ? props.keyboardType : 'default')}
+          keyboardType={props.keyboardType ? props.keyboardType : 'default'}
         />
       )}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {

@@ -9,7 +9,7 @@ interface LabelCheckboxProps {
   onChangeChecked: (checked: boolean) => void;
 }
 
-export const LabelCheckbox = (props: LabelCheckboxProps) => {
+export const LabelCheckboxComponent = (props: LabelCheckboxProps) => {
   return (
     <View style={styles.container}>
       <Checkbox
@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     marginLeft: '2%',
-    // padding: 17,
     width: 30,
     height: 30,
   },
@@ -39,9 +38,6 @@ const styles = StyleSheet.create({
     color: THEME.colors.primaryMain,
     fontFamily: THEME.typography.fontFamilyStandard,
     fontSize: THEME.typography.fontSize17,
-    // paddingBottom: 5,
     paddingLeft: '2%',
-    // paddingTop: 50,
-    // textAlign: 'left',
   },
 });

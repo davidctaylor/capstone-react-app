@@ -19,7 +19,7 @@ interface AvatarManagerProps {
   onChangeAvatarImage: (uri: string | null) => void;
 }
 
-export const AvatarManager = (props: AvatarManagerProps) => {
+export const AvatarManagerComponent = (props: AvatarManagerProps) => {
   const [imageLoading, setImageLoading] = useState<boolean>(false);
 
   const pickImage = async () => {

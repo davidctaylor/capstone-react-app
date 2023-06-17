@@ -2,26 +2,15 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "baseUrl": ".",
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "alwaysStrict": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "module": "commonjs",
+    "jsx": "react-native",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-native",
-    "incremental": true,
-    "noEmitOnError": true,
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
+      "@api/*": ["./src/api/*"],
       "@components/ui/*": ["./src/components/ui/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@screens/*": ["./src/screens/*"],
@@ -29,6 +18,5 @@
       "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["src/**/*", "./App.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"]
 }

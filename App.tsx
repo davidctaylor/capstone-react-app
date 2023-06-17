@@ -5,6 +5,7 @@ import {
   useFonts,
   Karla_400Regular,
   Karla_500Medium,
+  Karla_700Bold,
 } from '@expo-google-fonts/karla';
 import { MarkaziText_400Regular } from '@expo-google-fonts/markazi-text';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,11 +14,17 @@ import {
   ApplicationState,
   UserProfile,
   UserNotificationsOptions,
+  StackNavigationType,
 } from '@interfaces';
-import { OnboardingScreen, ProfileScreen, SplashScreen } from '@screens';
+import {
+  HomeScreen,
+  OnboardingScreen,
+  ProfileScreen,
+  SplashScreen,
+} from '@screens';
 import { useUpdateEffect, navigationOptions, AVATAR_LABEL } from '@utils';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackNavigationType>();
 const DEFAULT_APP_STATE = {
   isLoading: true,
   isOnboardingCompleted: false,
@@ -44,6 +51,7 @@ const App = () => {
   const [fontsLoaded] = useFonts({
     Karla_400Regular,
     Karla_500Medium,
+    Karla_700Bold,
     MarkaziText_400Regular,
   });
 
@@ -108,7 +116,6 @@ const App = () => {
         await AsyncStorage.multiSet(keyValues);
       } catch (e) {
         console.log('update state error', e);
-        // Alert.alert(`An error occurred: ${e.message}`);
       }
     })();
   }, [applicationState]);
@@ -126,24 +133,44 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {applicationState.isOnboardingCompleted ? (
-          <Stack.Screen
-            name="Profile"
-            options={navigationOptions('profile', {
-              avatarLabel: AVATAR_LABEL(
-                applicationState.userProfile.firstName,
-                applicationState.userProfile.lastName
-              ),
-              avatarImageUri: applicationState.userProfile.avatarImageUri,
-            })}
-          >
-            {() => (
-              <ProfileScreen
-                {...applicationState.userProfile}
-                updateUserProfile={setUserProfileState}
-                userLogout={logout}
-              />
-            )}
-          </Stack.Screen>
+          <>
+            <Stack.Screen
+              name="Home"
+              options={({ navigation }) =>
+                navigationOptions('home', {
+                  avatarLabel: AVATAR_LABEL(
+                    applicationState.userProfile.firstName,
+                    applicationState.userProfile.lastName
+                  ),
+                  avatarImageUri: applicationState.userProfile.avatarImageUri,
+                  navigation,
+                })
+              }
+            >
+              {() => <HomeScreen />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="Profile"
+              options={({ navigation }) =>
+                navigationOptions('profile', {
+                  avatarLabel: AVATAR_LABEL(
+                    applicationState.userProfile.firstName,
+                    applicationState.userProfile.lastName
+                  ),
+                  avatarImageUri: applicationState.userProfile.avatarImageUri,
+                  navigation,
+                })
+              }
+            >
+              {() => (
+                <ProfileScreen
+                  {...applicationState.userProfile}
+                  updateUserProfile={setUserProfileState}
+                  userLogout={logout}
+                />
+              )}
+            </Stack.Screen>
+          </>
         ) : (
           <Stack.Screen
             name="Onboarding"

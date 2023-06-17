@@ -11,7 +11,7 @@ interface LabelInputProps {
   onChangeText: (text: string) => void;
 }
 
-export const LabelInput = (props: LabelInputProps) => {
+export const LabelInputComponent = (props: LabelInputProps) => {
   return (
     <>
       <Text style={styles.regularText}>{props.label}</Text>

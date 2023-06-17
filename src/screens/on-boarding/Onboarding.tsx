@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { LabelInput } from '@components/ui';
+import { LabelInputComponent } from '@components/ui';
 import { STYLE_BUTTON, THEME } from '@styles';
 import { useValidateUser } from '@utils';
 
@@ -29,15 +29,15 @@ export const OnboardingScreen = (props: {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.contentContainer}>
-          <Text style={[styles.regularText, styles.titleText]}>
+          <Text style={[styles.textRegular, styles.textTitle]}>
             Let us get to know you
           </Text>
-          <LabelInput
+          <LabelInputComponent
             label="First name"
             value={firstName}
             onChangeText={(text: string) => setFirstName(text)}
           />
-          <LabelInput
+          <LabelInputComponent
             label="Email"
             value={emailAddress}
             keyboardType={'email-address'}
@@ -48,7 +48,7 @@ export const OnboardingScreen = (props: {
             style={[
               STYLE_BUTTON.button,
               styles.button,
-              !isValidUser ? styles.buttonDisabled : {},
+              !isValidUser ? STYLE_BUTTON.buttonDisabled : {},
             ]}
             onPress={() => {
               props.setOnboardingState(emailAddress, firstName);
@@ -92,11 +92,6 @@ const styles = StyleSheet.create({
     marginBottom: 44,
     marginTop: 44,
   },
-  buttonDisabled: {
-    backgroundColor: THEME.colors.primaryMain,
-    borderColor: THEME.colors.textStandard,
-    opacity: 0.5,
-  },
   buttonText: {
     color: THEME.colors.primaryMain,
     fontSize: THEME.typography.fontSize17,
@@ -106,7 +101,7 @@ const styles = StyleSheet.create({
   buttonTextDisabled: {
     color: THEME.colors.textStandard,
   },
-  regularText: {
+  textRegular: {
     color: THEME.colors.primaryMain,
     fontFamily: THEME.typography.fontFamilyStandard,
     fontSize: THEME.typography.fontSize17,
@@ -115,7 +110,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     textAlign: 'left',
   },
-  titleText: {
+  textTitle: {
     fontSize: THEME.typography.fontSize32,
     fontFamily: THEME.typography.fontFamilyMedium,
     paddingTop: 50,

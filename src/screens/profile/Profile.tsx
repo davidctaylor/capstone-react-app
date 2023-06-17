@@ -13,7 +13,11 @@ import {
   UserProfile,
   UserNotificationsOptions,
 } from '@interfaces';
-import { AvatarManager, LabelCheckbox, LabelInput } from '@components/ui';
+import {
+  AvatarManagerComponent,
+  LabelCheckboxComponent,
+  LabelInputComponent,
+} from '@components/ui';
 import { AVATAR_LABEL, useValidateUser } from '@utils';
 import { STYLE_BUTTON, THEME } from '@styles';
 
@@ -44,7 +48,7 @@ export const ProfileScreen = (props: ApplicationState) => {
   const notifications: React.ReactElement[] = [];
   Object.entries(userProfile && userProfile.notifications).forEach((item) => {
     notifications.push(
-      <LabelCheckbox
+      <LabelCheckboxComponent
         label={item[0]}
         value={item[1]}
         key={item[0]}
@@ -60,10 +64,10 @@ export const ProfileScreen = (props: ApplicationState) => {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.contentContainer}>
-          <Text style={[styles.regularText, styles.titleText]}>
+          <Text style={[styles.textTegular, styles.textTitle]}>
             Personal information
           </Text>
-          <AvatarManager
+          <AvatarManagerComponent
             avatarLabel={AVATAR_LABEL(
               userProfile.firstName,
               userProfile.lastName
@@ -73,19 +77,19 @@ export const ProfileScreen = (props: ApplicationState) => {
               updateUserProfile('avatarImageUri', uri)
             }
           />
-          <LabelInput
+          <LabelInputComponent
             label="First name"
             value={userProfile.firstName}
             onChangeText={(text: string) =>
               updateUserProfile('firstName', text)
             }
           />
-          <LabelInput
+          <LabelInputComponent
             label="Last name"
             value={userProfile.lastName}
             onChangeText={(text: string) => updateUserProfile('lastName', text)}
           />
-          <LabelInput
+          <LabelInputComponent
             label="Email"
             value={userProfile.emailAddress}
             onChangeText={(text: string) =>
@@ -93,7 +97,7 @@ export const ProfileScreen = (props: ApplicationState) => {
             }
             keyboardType={'email-address'}
           />
-          <LabelInput
+          <LabelInputComponent
             label="Phone number"
             value={userProfile.phoneNumber}
             onChangeText={(text: string) =>
@@ -104,9 +108,9 @@ export const ProfileScreen = (props: ApplicationState) => {
           />
           <Text
             style={[
-              styles.regularText,
-              styles.titleText,
-              styles.titleTextNotification,
+              styles.textTegular,
+              styles.textTitle,
+              styles.textTitleNotification,
             ]}
           >
             Email notifications
@@ -203,7 +207,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     width: '46%',
   },
-  regularText: {
+  textTegular: {
     color: THEME.colors.primaryMain,
     fontFamily: THEME.typography.fontFamilyStandard,
     fontSize: THEME.typography.fontSize17,
@@ -211,13 +215,13 @@ const styles = StyleSheet.create({
     paddingLeft: '5%',
     textAlign: 'left',
   },
-  titleText: {
+  textTitle: {
     fontSize: THEME.typography.fontSize32,
     fontFamily: THEME.typography.fontFamilyMedium,
     paddingLeft: '2%',
     paddingTop: THEME.typography.fontSize17,
   },
-  titleTextNotification: {
+  textTitleNotification: {
     paddingBottom: THEME.typography.fontSize17,
   },
 });

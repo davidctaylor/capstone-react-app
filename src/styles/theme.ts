@@ -3,7 +3,7 @@ export const THEME: Record<string, Record<string, string | number>> = {
     highlightDark: '#333333',
     highlightLight: '#EDEFEE',
     background: '#FFF',
-    backgroundLight: '#f4f4f4', //'#DDDDDD',
+    backgroundLight: '#f4f4f4',
     backgroundDark: '#CACBCB',
     primaryMain: '#495E57',
     primaryMinor: '#F4CE14',
@@ -13,10 +13,14 @@ export const THEME: Record<string, Record<string, string | number>> = {
     textWhite: '#FFF',
   },
   typography: {
+    fontFamilyBold: 'Karla_700Bold',
     fontFamilyStandard: 'Karla_400Regular',
     fontFamilyMedium: 'Karla_500Medium',
     fontFamilyHighlight: 'MarkaziText_400Regular',
+    fontSize40: 40,
     fontSize32: 32,
+    fontSize24: 24,
+    fontSize20: 20,
     fontSize17: 17,
     fontSize15: 15,
   },
@@ -36,6 +40,9 @@ export const STYLE_BUTTON: Record<string, Record<string, string | number>> = {
     paddingLeft: 17,
     paddingRight: 17,
     opacity: 1,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
   },
   buttonPrimary: {
     backgroundColor: THEME.colors.primaryMain,

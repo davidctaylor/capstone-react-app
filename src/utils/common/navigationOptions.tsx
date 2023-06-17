@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { StackNavigationType } from '@interfaces';
 import { STYLE_BUTTON, THEME } from '@styles';
 
 const styles = StyleSheet.create({
@@ -18,14 +19,20 @@ const styles = StyleSheet.create({
 interface HeaderProps {
   avatarLabel: string;
   avatarImageUri: string | null;
-  onChangeAvatarImage: (uri: string | null) => void;
+  navigation: StackNavigationType;
+  onClickAvatarImage?: () => void;
 }
 
 export const navigationOptions = (path: string, props: HeaderProps) => {
   return {
-    ...(path !== 'onboarding' && {
+    ...(path === 'profile' && {
       headerLeft: () => (
-        <TouchableOpacity style={[]}>
+        <TouchableOpacity
+          style={[]}
+          onPress={() => {
+            props.navigation.navigate(path === 'profile' ? 'Home' : 'Profile');
+          }}
+        >
           <Ionicons
             name="md-arrow-back-circle-sharp"
             size={42}
@@ -45,7 +52,12 @@ export const navigationOptions = (path: string, props: HeaderProps) => {
     ),
     ...(path !== 'onboarding' && {
       headerRight: () => (
-        <TouchableOpacity style={[STYLE_BUTTON.button, styles.buttonAvatar]}>
+        <TouchableOpacity
+          style={[STYLE_BUTTON.button, styles.buttonAvatar]}
+          onPress={() => {
+            props.navigation.navigate(path === 'profile' ? 'Home' : 'Profile');
+          }}
+        >
           {props.avatarImageUri ? (
             <Image
               source={{ uri: props.avatarImageUri }}

@@ -1,3 +1,5 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 export enum UserNotificationsOptions {
   OrderStatus = 'Order statuses',
   PasswordChange = 'Password changes',
@@ -19,3 +21,12 @@ export interface ApplicationState {
   isOnboardingCompleted: boolean;
   userProfile: UserProfile;
 }
+
+export type StackNavigationParamList = {
+  Home: undefined;
+  Profile: undefined;
+  Onboarding: undefined;
+};
+
+export type StackNavigationType =
+  NativeStackNavigationProp<StackNavigationParamList>;

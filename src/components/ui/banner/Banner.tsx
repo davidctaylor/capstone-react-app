@@ -1,13 +1,8 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { THEME } from '@styles';
 
-interface BannerProps {
-  onChangeSearch: (text: string) => void;
-}
-
-export const Banner = (props: BannerProps) => {
+export const Banner = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.textTitle}>Little Lemon</Text>
@@ -15,7 +10,7 @@ export const Banner = (props: BannerProps) => {
       <View style={styles.textContainer}>
         <Text style={styles.textRegular}>
           We are a family owned Mediterranian restaurant focused on the
-          traditional recipes server with a modern twist
+          traditional recipes server with a modern twist We are a family owned
         </Text>
         <View style={styles.imageContainer}>
           <Image
@@ -26,20 +21,6 @@ export const Banner = (props: BannerProps) => {
             accessibilityLabel={'Little Lemon Logo'}
           />
         </View>
-      </View>
-      <View style={styles.seachContainer}>
-        <Ionicons
-          style={styles.searchIcon}
-          name="md-search-sharp"
-          size={17}
-          color={THEME.colors.primaryMain}
-        />
-        <TextInput
-          autoCapitalize={'none'}
-          style={styles.searchInput}
-          clearButtonMode={'while-editing'}
-          onChangeText={(text: string) => props.onChangeSearch(text)}
-        />
       </View>
     </View>
   );
@@ -55,7 +36,9 @@ const styles = StyleSheet.create({
     paddingRight: '2%',
   },
   imageContainer: {
+    alignItems: 'center',
     flex: 0.25,
+    justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 6,
   },
@@ -65,6 +48,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     alignItems: 'center',
+    alignContent: 'center',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -84,24 +68,5 @@ const styles = StyleSheet.create({
   textSubTitle: {
     color: THEME.colors.textWhite,
     fontSize: THEME.typography.fontSize32,
-  },
-  seachContainer: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: THEME.colors.backgroundLight,
-    flexDirection: 'row',
-    width: '100%',
-    borderRadius: 6,
-  },
-  searchIcon: {
-    paddingLeft: THEME.typography.fontSize17 / 2,
-  },
-  searchInput: {
-    flex: 1,
-    backgroundColor: THEME.colors.backgroundLight,
-    color: THEME.colors.textStandard,
-    fontSize: THEME.typography.fontSize17,
-    height: 34,
-    borderRadius: 6,
   },
 });

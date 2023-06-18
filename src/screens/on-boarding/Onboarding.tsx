@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { LabelInputComponent } from '@components/ui';
+import { Banner, LabelInputComponent } from '@components/ui';
 import { STYLE_BUTTON, THEME } from '@styles';
 import { useValidateUser } from '@utils';
 
@@ -27,6 +27,7 @@ export const OnboardingScreen = (props: {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
+      <Banner />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.contentContainer}>
           <Text style={[styles.textRegular, styles.textTitle]}>
@@ -80,11 +81,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   contentContainer: {
-    marginTop: 22,
-    backgroundColor: THEME.colors.backgroundLight,
-    borderRadius: 6,
     alignSelf: 'center',
+    borderWidth: 0,
+    borderColor: THEME.colors.backgroundDark,
+    backgroundColor: THEME.colors.background,
     width: '94%',
+    marginTop: 22,
   },
   button: {
     alignSelf: 'center',
@@ -105,17 +107,12 @@ const styles = StyleSheet.create({
     color: THEME.colors.primaryMain,
     fontFamily: THEME.typography.fontFamilyStandard,
     fontSize: THEME.typography.fontSize17,
-    paddingBottom: 5,
-    paddingLeft: '5%',
-    paddingTop: 50,
     textAlign: 'left',
   },
   textTitle: {
     fontSize: THEME.typography.fontSize32,
     fontFamily: THEME.typography.fontFamilyMedium,
-    paddingTop: 50,
-    paddingBottom: 40,
-    paddingLeft: 0,
-    textAlign: 'center',
+    paddingTop: THEME.typography.fontSize17,
+    paddingLeft: '2%',
   },
 });

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   input: {
     alignSelf: 'center',
     borderColor: THEME.colors.primaryMain,
-    backgroundColor: THEME.colors.backgroundLight,
+    backgroundColor: THEME.colors.background,
     borderRadius: 0,
     borderBottomWidth: 2,
     color: THEME.colors.textStandard,

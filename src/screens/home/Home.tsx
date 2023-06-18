@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { MenuItem, MenuCategoryOption } from '@api/';
 import { Banner, MenuFilterComponent, MenuItemComponent } from '@components/ui';
 import { useMenuItems } from '@utils';
@@ -21,7 +29,23 @@ export const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Banner onChangeSearch={(text: string) => setSearchString(text)} />
+      <Banner />
+      <View style={styles.seachContainer}>
+        <View style={styles.seachWrapper}>
+          <Ionicons
+            style={styles.searchIcon}
+            name="md-search-sharp"
+            size={17}
+            color={THEME.colors.primaryMain}
+          />
+          <TextInput
+            autoCapitalize={'none'}
+            style={styles.searchInput}
+            clearButtonMode={'while-editing'}
+            onChangeText={(text: string) => setSearchString(text)}
+          />
+        </View>
+      </View>
       <Text style={styles.textTitle}>ORDER FOR DELIVERY!</Text>
       <MenuFilterComponent
         menuCategories={menuCategories}
@@ -48,13 +72,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignSelf: 'center',
-    borderWidth: 1,
-    borderColor: THEME.colors.backgroundDark,
     backgroundColor: THEME.colors.background,
-    borderRadius: 6,
     marginTop: 25,
-    paddingBottom: THEME.typography.fontSize17,
-    paddingTop: THEME.typography.fontSize17,
     width: '94%',
   },
   separator: {
@@ -63,7 +82,7 @@ const styles = StyleSheet.create({
     borderColor: THEME.colors.backgroundDark,
     marginBottom: 17,
     marginTop: 17,
-    width: '96%',
+    width: '90%',
   },
   textTitle: {
     color: THEME.colors.primaryMain,
@@ -72,5 +91,30 @@ const styles = StyleSheet.create({
     paddingLeft: '2%',
     paddingBottom: 17,
     paddingTop: 17,
+  },
+
+  seachContainer: {
+    backgroundColor: THEME.colors.primaryMain,
+    paddingBottom: 17,
+    width: '100%',
+  },
+  seachWrapper: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: THEME.colors.backgroundLight,
+    flexDirection: 'row',
+    width: '94%',
+    borderRadius: 6,
+  },
+  searchIcon: {
+    paddingLeft: THEME.typography.fontSize17 / 2,
+  },
+  searchInput: {
+    flex: 1,
+    backgroundColor: THEME.colors.backgroundLight,
+    color: THEME.colors.textStandard,
+    fontSize: THEME.typography.fontSize17,
+    height: 34,
+    borderRadius: 6,
   },
 });

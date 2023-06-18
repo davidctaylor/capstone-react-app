@@ -167,9 +167,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginTop: 12,
-    paddingBottom: THEME.typography.fontSize17,
-    backgroundColor: THEME.colors.backgroundLight,
-    borderRadius: 6,
+    backgroundColor: THEME.colors.background,
     alignSelf: 'center',
     width: '94%',
   },
@@ -222,6 +220,7 @@ const styles = StyleSheet.create({
     paddingTop: THEME.typography.fontSize17,
   },
   textTitleNotification: {
+    fontSize: THEME.typography.fontSize24,
     paddingBottom: THEME.typography.fontSize17,
   },
 });

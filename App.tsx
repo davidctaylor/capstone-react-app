@@ -14,17 +14,18 @@ import {
   ApplicationState,
   UserProfile,
   UserNotificationsOptions,
-  StackNavigationType,
-} from '@interfaces';
+  StackNavigationParamListType,
+} from '@common/interfaces';
+import { useUpdateEffect } from '@common/hooks';
+import { navigationOptions, AVATAR_LABEL } from '@common/utils';
 import {
   HomeScreen,
   OnboardingScreen,
   ProfileScreen,
   SplashScreen,
-} from '@screens';
-import { useUpdateEffect, navigationOptions, AVATAR_LABEL } from '@utils';
+} from '@screens/index';
 
-const Stack = createNativeStackNavigator<StackNavigationType>();
+const Stack = createNativeStackNavigator<StackNavigationParamListType>();
 const DEFAULT_APP_STATE = {
   isLoading: true,
   isOnboardingCompleted: false,
@@ -136,14 +137,15 @@ const App = () => {
           <>
             <Stack.Screen
               name="Home"
-              options={({ navigation }) =>
-                navigationOptions('home', {
+              options={({ navigation, route }) =>
+                navigationOptions({
                   avatarLabel: AVATAR_LABEL(
                     applicationState.userProfile.firstName,
                     applicationState.userProfile.lastName
                   ),
                   avatarImageUri: applicationState.userProfile.avatarImageUri,
                   navigation,
+                  route,
                 })
               }
             >
@@ -151,20 +153,21 @@ const App = () => {
             </Stack.Screen>
             <Stack.Screen
               name="Profile"
-              options={({ navigation }) =>
-                navigationOptions('profile', {
+              options={({ navigation, route }) =>
+                navigationOptions({
                   avatarLabel: AVATAR_LABEL(
                     applicationState.userProfile.firstName,
                     applicationState.userProfile.lastName
                   ),
                   avatarImageUri: applicationState.userProfile.avatarImageUri,
                   navigation,
+                  route,
                 })
               }
             >
               {() => (
                 <ProfileScreen
-                  {...applicationState.userProfile}
+                  userProfile={{ ...applicationState.userProfile }}
                   updateUserProfile={setUserProfileState}
                   userLogout={logout}
                 />
@@ -174,13 +177,17 @@ const App = () => {
         ) : (
           <Stack.Screen
             name="Onboarding"
-            options={navigationOptions('onboarding', {
-              avatarLabel: AVATAR_LABEL(
-                applicationState.userProfile.firstName,
-                applicationState.userProfile.lastName
-              ),
-              avatarImageUri: applicationState.userProfile.avatarImageUri,
-            })}
+            options={({ navigation, route }) =>
+              navigationOptions({
+                avatarLabel: AVATAR_LABEL(
+                  applicationState.userProfile.firstName,
+                  applicationState.userProfile.lastName
+                ),
+                avatarImageUri: applicationState.userProfile.avatarImageUri,
+                navigation,
+                route,
+              })
+            }
           >
             {() => <OnboardingScreen setOnboardingState={setOnboardingState} />}
           </Stack.Screen>

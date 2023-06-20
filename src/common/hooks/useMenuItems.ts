@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import {
   MenuItem,
-  MenuItems,
   MenuCategoryOption,
   HttpApi,
   DatabaseApi,
-} from '@api';
+} from '@common/api';
 
 export const useMenuItems = (
   menuCategories: MenuCategoryOption[],
   searchString: string
-) => {
+): MenuItem[] => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [initialized, setInitialized] = useState<boolean>(false);
 
@@ -18,9 +17,7 @@ export const useMenuItems = (
     (async () => {
       try {
         await DatabaseApi.createMenuItemsTable();
-        const items: number = await DatabaseApi.selectCountMenuItems(
-          menuCategories
-        );
+        const items: number = await DatabaseApi.selectCountMenuItems();
         if (items === 0) {
           DatabaseApi.insertMenuItems(await HttpApi.getMenuItems());
         }
@@ -37,7 +34,7 @@ export const useMenuItems = (
     }
     (async () => {
       try {
-        const items: MenuItems[] = await DatabaseApi.filterMenuItems(
+        const items: MenuItem[] = await DatabaseApi.filterMenuItems(
           menuCategories,
           searchString
         );

@@ -10,13 +10,10 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@api/*": ["./src/api/*"],
-      "@components/ui/*": ["./src/components/ui/*"],
-      "@interfaces/*": ["./src/interfaces/*"],
-      "@screens/*": ["./src/screens/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@common/*": ["./src/common/*"],
+      "@components/*": ["./src/components/*"],
+      "@screens/*": ["./src/screens/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "App.tsx"]
 }

@@ -18,7 +18,7 @@ export const DatabaseApi = {
     });
   },
 
-  selectCountMenuItems: async () => {
+  selectCountMenuItems: async (): Promise<number> => {
     return new Promise((resolve, reject) => {
       db.transaction((tx) => {
         tx.executeSql('SELECT COUNT(id) FROM menuItems', [], (_, { rows }) => {
@@ -28,7 +28,10 @@ export const DatabaseApi = {
     });
   },
 
-  filterMenuItems: async (categories: MenuCategoryOption[], search: string) => {
+  filterMenuItems: async (
+    categories: MenuCategoryOption[],
+    search: string
+  ): Promise<MenuItem[]> => {
     return new Promise((resolve, reject) => {
       const active: string[] = categories
         .filter((category) => category.active)

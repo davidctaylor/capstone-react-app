@@ -6,12 +6,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import { MenuItem, HttpApi } from '@api/';
-import { THEME } from '@styles';
+import { MenuItem, HttpApi } from '@common/api/';
+import { THEME_COLORS, THEME_TYPOGRAPHY } from '@common/styles';
 
 interface MenuItemProps {
   menuItem: MenuItem;
-  onChangeChecked: (checked: boolean) => void;
 }
 
 const formatPrice = (price: string) =>
@@ -71,18 +70,18 @@ const styles = StyleSheet.create({
     width: 100,
   },
   textRegular: {
-    color: THEME.colors.primaryMain,
-    fontFamily: THEME.typography.fontFamilyStandard,
-    fontSize: THEME.typography.fontSize17,
+    color: THEME_COLORS.primaryMain,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
   },
   textTitle: {
-    fontSize: THEME.typography.fontSize24,
-    fontFamily: THEME.typography.fontFamilyMedium,
+    fontSize: THEME_TYPOGRAPHY.fontSize24 as number,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyMedium as string,
     paddingBottom: 12,
   },
   textPrice: {
-    fontSize: THEME.typography.fontSize20,
-    fontFamily: THEME.typography.fontFamilyMedium,
+    fontSize: THEME_TYPOGRAPHY.fontSize20 as number,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyMedium as string,
     paddingTop: 10,
   },
 });

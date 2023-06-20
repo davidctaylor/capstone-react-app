@@ -22,11 +22,21 @@ export interface ApplicationState {
   userProfile: UserProfile;
 }
 
-export type StackNavigationParamList = {
+export interface ProfileScreenProps {
+  userProfile: UserProfile;
+  updateUserProfile: (profile: UserProfile) => void;
+  userLogout: () => void;
+}
+
+export interface OnboardingScreenProps {
+  setOnboardingState: (email: string, firstName: string) => void;
+}
+
+export type StackNavigationParamListType = {
   Home: undefined;
-  Profile: undefined;
-  Onboarding: undefined;
+  Profile: ProfileScreenProps;
+  Onboarding: OnboardingScreenProps;
 };
 
 export type StackNavigationType =
-  NativeStackNavigationProp<StackNavigationParamList>;
+  NativeStackNavigationProp<StackNavigationParamListType>;

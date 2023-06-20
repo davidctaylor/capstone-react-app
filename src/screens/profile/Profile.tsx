@@ -9,20 +9,23 @@ import {
   ScrollView,
 } from 'react-native';
 import {
-  ApplicationState,
-  UserProfile,
-  UserNotificationsOptions,
-} from '@interfaces';
-import {
   AvatarManagerComponent,
   LabelCheckboxComponent,
   LabelInputComponent,
 } from '@components/ui';
-import { AVATAR_LABEL, useValidateUser } from '@utils';
-import { STYLE_BUTTON, THEME } from '@styles';
+import {
+  ProfileScreenProps,
+  UserProfile,
+  UserNotificationsOptions,
+} from '@common/interfaces';
+import { AVATAR_LABEL } from '@common/utils';
+import { useValidateUser } from '@common/hooks';
+import { STYLE_BUTTON, THEME_COLORS, THEME_TYPOGRAPHY } from '@common/styles';
 
-export const ProfileScreen = (props: ApplicationState) => {
-  const [userProfile, setUserProfile] = useState<UserProfile>(props);
+export const ProfileScreen = (props: ProfileScreenProps) => {
+  const [userProfile, setUserProfile] = useState<UserProfile>(
+    props.userProfile
+  );
   const updateUserProfile = (key: string, val: string | null) => {
     setUserProfile({ ...userProfile, [key]: val });
   };
@@ -39,7 +42,7 @@ export const ProfileScreen = (props: ApplicationState) => {
     emailAddress: userProfile.emailAddress,
     firstName: userProfile.firstName,
   });
-  const activeUserProfile: UserProfile = { ...props };
+  const activeUserProfile: UserProfile = { ...props.userProfile };
 
   if (!userProfile) {
     return;
@@ -52,7 +55,12 @@ export const ProfileScreen = (props: ApplicationState) => {
         label={item[0]}
         value={item[1]}
         key={item[0]}
-        onChangeChecked={() => updateNotifications(item[0], item[1] as boolean)}
+        onChangeChecked={() =>
+          updateNotifications(
+            item[0] as UserNotificationsOptions,
+            item[1] as boolean
+          )
+        }
       />
     );
   });
@@ -159,7 +167,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: THEME.colors.background,
+    backgroundColor: THEME_COLORS.background,
   },
   scrollContainer: {
     flexGrow: 1,
@@ -167,7 +175,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     marginTop: 12,
-    backgroundColor: THEME.colors.background,
+    backgroundColor: THEME_COLORS.background,
     alignSelf: 'center',
     width: '94%',
   },
@@ -178,49 +186,49 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '96%',
     padding: 9,
-    marginTop: THEME.typography.fontSize17 * 2,
+    marginTop: (THEME_TYPOGRAPHY.fontSize17 as number) * 2,
   },
   buttonDisabled: {
-    backgroundColor: THEME.colors.primaryMain,
-    borderColor: THEME.colors.textStandard,
+    backgroundColor: THEME_COLORS.primaryMain,
+    borderColor: THEME_COLORS.textStandard,
     opacity: 0.5,
   },
   buttonLogout: {
-    backgroundColor: THEME.colors.primaryMinor,
+    backgroundColor: THEME_COLORS.primaryMinor,
   },
   buttonSave: {
-    backgroundColor: THEME.colors.primaryMain,
+    backgroundColor: THEME_COLORS.primaryMain,
   },
   buttonTextSave: {
-    color: THEME.colors.highlightLight,
+    color: THEME_COLORS.highlightLight,
   },
   buttonTextDisabled: {
-    color: THEME.colors.textStandard,
+    color: THEME_COLORS.textStandard,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: THEME.typography.fontSize17,
+    marginBottom: THEME_TYPOGRAPHY.fontSize17 as number,
   },
   buttonRow: {
     width: '46%',
   },
   textTegular: {
-    color: THEME.colors.primaryMain,
-    fontFamily: THEME.typography.fontFamilyStandard,
-    fontSize: THEME.typography.fontSize17,
+    color: THEME_COLORS.primaryMain,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyMedium as string,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
     paddingBottom: 5,
     paddingLeft: '5%',
     textAlign: 'left',
   },
   textTitle: {
-    fontSize: THEME.typography.fontSize32,
-    fontFamily: THEME.typography.fontFamilyMedium,
+    fontSize: THEME_TYPOGRAPHY.fontSize32 as number,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyMedium as string,
     paddingLeft: '2%',
-    paddingTop: THEME.typography.fontSize17,
+    paddingTop: THEME_TYPOGRAPHY.fontSize17 as number,
   },
   textTitleNotification: {
-    fontSize: THEME.typography.fontSize24,
-    paddingBottom: THEME.typography.fontSize17,
+    fontSize: THEME_TYPOGRAPHY.fontSize24 as number,
+    paddingBottom: THEME_TYPOGRAPHY.fontSize17 as number,
   },
 });

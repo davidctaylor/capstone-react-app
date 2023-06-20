@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, KeyboardType } from 'react-native';
 import { MaskedTextInput } from 'react-native-mask-text';
-import { THEME } from '@styles';
+import { THEME_COLORS, THEME_TYPOGRAPHY } from '@common/styles';
 
 interface LabelInputProps {
   label: string;
@@ -44,22 +44,22 @@ export const LabelInputComponent = (props: LabelInputProps) => {
 const styles = StyleSheet.create({
   input: {
     alignSelf: 'center',
-    borderColor: THEME.colors.primaryMain,
-    backgroundColor: THEME.colors.background,
+    borderColor: THEME_COLORS.primaryMain,
+    backgroundColor: THEME_COLORS.background,
     borderRadius: 0,
     borderBottomWidth: 2,
-    color: THEME.colors.textStandard,
-    fontSize: THEME.typography.fontSize17,
+    color: THEME_COLORS.textStandard,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
     height: 34,
     width: '96%',
   },
   regularText: {
-    color: THEME.colors.primaryMain,
-    fontFamily: THEME.typography.fontFamilyStandard,
-    fontSize: THEME.typography.fontSize17,
+    color: THEME_COLORS.primaryMain,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
     paddingBottom: 5,
     paddingLeft: '2p%',
-    paddingTop: THEME.typography.fontSize17 * 2,
+    paddingTop: (THEME_TYPOGRAPHY.fontSize17 as number) * 2,
     textAlign: 'left',
   },
 });

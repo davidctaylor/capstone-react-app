@@ -1,10 +1,27 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { THEME } from '@styles';
+import { Animated, Image, StyleSheet, Text, View } from 'react-native';
+import { THEME_COLORS, THEME_TYPOGRAPHY } from '@common/styles';
 
-export const Banner = () => {
+const MAX_HEIGHT = 200;
+
+interface BannerProps {
+  scrollY?: Animated.Value;
+}
+
+export const Banner = (props: BannerProps) => {
+  const bannerHeight =
+    props && props.scrollY
+      ? props.scrollY.interpolate({
+          inputRange: [0, MAX_HEIGHT - 0],
+          outputRange: [MAX_HEIGHT, 0],
+          extrapolate: 'clamp',
+        })
+      : null;
+
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={[styles.container, props.scrollY ? { height: bannerHeight } : {}]}
+    >
       <Text style={styles.textTitle}>Little Lemon</Text>
       <Text style={[styles.textTitle, styles.textSubTitle]}>Chicago</Text>
       <View style={styles.textContainer}>
@@ -22,16 +39,15 @@ export const Banner = () => {
           />
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: THEME.colors.primaryMain,
+    backgroundColor: THEME_COLORS.primaryMain,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    paddingBottom: THEME.typography.fontSize17,
     paddingLeft: '2%',
     paddingRight: '2%',
   },
@@ -55,18 +71,18 @@ const styles = StyleSheet.create({
   },
   textRegular: {
     flex: 0.75,
-    color: THEME.colors.textWhite,
-    fontFamily: THEME.typography.fontFamilyStandard,
-    fontSize: THEME.typography.fontSize17,
-    paddingBottom: THEME.typography.fontSize17,
+    color: THEME_COLORS.textWhite,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
+    paddingBottom: THEME_TYPOGRAPHY.fontSize17 as number,
   },
   textTitle: {
-    color: THEME.colors.primaryMinor,
-    fontSize: THEME.typography.fontSize40,
-    fontFamily: THEME.typography.fontFamilyHighlight,
+    color: THEME_COLORS.primaryMinor,
+    fontSize: THEME_TYPOGRAPHY.fontSize40 as number,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyHighlight as string,
   },
   textSubTitle: {
-    color: THEME.colors.textWhite,
-    fontSize: THEME.typography.fontSize32,
+    color: THEME_COLORS.textWhite,
+    fontSize: THEME_TYPOGRAPHY.fontSize32 as number,
   },
 });

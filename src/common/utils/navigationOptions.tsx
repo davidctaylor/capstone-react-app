@@ -1,12 +1,14 @@
 import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StackNavigationType } from '@interfaces';
-import { STYLE_BUTTON, THEME } from '@styles';
+import { StackNavigationType } from '@common/interfaces';
+import { STYLE_BUTTON, THEME_COLORS } from '@common/styles';
+
+import { Route } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   buttonAvatar: {
-    backgroundColor: THEME.colors.primaryMain,
+    backgroundColor: THEME_COLORS.primaryMain,
     borderWidth: 0,
     paddingLeft: 0,
     paddingRight: 0,
@@ -20,23 +22,26 @@ interface HeaderProps {
   avatarLabel: string;
   avatarImageUri: string | null;
   navigation: StackNavigationType;
+  route: Route<string>;
   onClickAvatarImage?: () => void;
 }
 
-export const navigationOptions = (path: string, props: HeaderProps) => {
+export const navigationOptions = (props: HeaderProps) => {
   return {
-    ...(path === 'profile' && {
+    ...(props.route.name === 'Profile' && {
       headerLeft: () => (
         <TouchableOpacity
           style={[]}
           onPress={() => {
-            props.navigation.navigate(path === 'profile' ? 'Home' : 'Profile');
+            props.navigation.navigate(
+              props.route.name === 'Profile' ? 'Home' : 'Profile'
+            );
           }}
         >
           <Ionicons
             name="md-arrow-back-circle-sharp"
             size={42}
-            color={THEME.colors.primaryMain}
+            color={THEME_COLORS.primaryMain}
           />
         </TouchableOpacity>
       ),
@@ -50,12 +55,14 @@ export const navigationOptions = (path: string, props: HeaderProps) => {
         accessibilityLabel={'Little Lemon Logo'}
       />
     ),
-    ...(path !== 'onboarding' && {
+    ...(props.route.name !== 'onboarding' && {
       headerRight: () => (
         <TouchableOpacity
           style={[STYLE_BUTTON.button, styles.buttonAvatar]}
           onPress={() => {
-            props.navigation.navigate(path === 'profile' ? 'Home' : 'Profile');
+            props.navigation.navigate(
+              props.route.name === 'Profile' ? 'Home' : 'Profile'
+            );
           }}
         >
           {props.avatarImageUri ? (

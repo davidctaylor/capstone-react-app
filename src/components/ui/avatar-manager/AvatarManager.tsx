@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { ImagePickerResult as ExpoImagePickerResult } from 'expo-image-picker';
 import * as ImagePicker from 'expo-image-picker';
-import { STYLE_BUTTON, THEME } from '@styles';
+import { STYLE_BUTTON, THEME_COLORS, THEME_TYPOGRAPHY } from '@common/styles';
 
 type ImagePickerResult = ExpoImagePickerResult & { cancelled?: boolean };
 
@@ -80,7 +80,7 @@ export const AvatarManagerComponent = (props: AvatarManagerProps) => {
             <ActivityIndicator
               style={styles.activity}
               size="small"
-              color={THEME.colors.textWhite}
+              color={THEME_COLORS.textWhite}
             />
           )}
         </TouchableOpacity>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     width: '96%',
   },
   buttonAvatar: {
-    backgroundColor: THEME.colors.primaryMain,
+    backgroundColor: THEME_COLORS.primaryMain,
     borderWidth: 0,
     borderRadius: 28,
     height: 56,
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   regularText: {
-    color: THEME.colors.primaryMain,
-    fontFamily: THEME.typography.fontFamilyStandard,
-    fontSize: THEME.typography.fontSize17,
+    color: THEME_COLORS.primaryMain,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
     paddingBottom: 5,
     paddingLeft: '2p%',
-    paddingTop: THEME.typography.fontSize17 * 2,
+    paddingTop: (THEME_TYPOGRAPHY.fontSize17 as number) * 2,
     textAlign: 'left',
   },
   activity: {

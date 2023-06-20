@@ -9,12 +9,11 @@ import {
   View,
 } from 'react-native';
 import { Banner, LabelInputComponent } from '@components/ui';
-import { STYLE_BUTTON, THEME } from '@styles';
-import { useValidateUser } from '@utils';
+import { STYLE_BUTTON, THEME_COLORS, THEME_TYPOGRAPHY } from '@common/styles';
+import { useValidateUser } from '@common/hooks';
+import { OnboardingScreenProps } from '@common/interfaces';
 
-export const OnboardingScreen = (props: {
-  setOnboardingState: (email: string, firstName: string) => void;
-}) => {
+export const OnboardingScreen = (props: OnboardingScreenProps) => {
   const [emailAddress, setEmailAddress] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [isValidUser] = useValidateUser({
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: THEME.colors.background,
+    backgroundColor: THEME_COLORS.background,
   },
   scrollContainer: {
     flexGrow: 1,
@@ -83,8 +82,8 @@ const styles = StyleSheet.create({
   contentContainer: {
     alignSelf: 'center',
     borderWidth: 0,
-    borderColor: THEME.colors.backgroundDark,
-    backgroundColor: THEME.colors.background,
+    borderColor: THEME_COLORS.backgroundDark,
+    backgroundColor: THEME_COLORS.background,
     width: '94%',
     marginTop: 22,
   },
@@ -95,24 +94,24 @@ const styles = StyleSheet.create({
     marginTop: 44,
   },
   buttonText: {
-    color: THEME.colors.primaryMain,
-    fontSize: THEME.typography.fontSize17,
-    fontFamily: THEME.typography.fontFamilyStandard,
+    color: THEME_COLORS.primaryMain,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
     textAlign: 'center',
   },
   buttonTextDisabled: {
-    color: THEME.colors.textStandard,
+    color: THEME_COLORS.textStandard,
   },
   textRegular: {
-    color: THEME.colors.primaryMain,
-    fontFamily: THEME.typography.fontFamilyStandard,
-    fontSize: THEME.typography.fontSize17,
+    color: THEME_COLORS.primaryMain,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
+    fontSize: THEME_TYPOGRAPHY.fontSize17 as number,
     textAlign: 'left',
   },
   textTitle: {
-    fontSize: THEME.typography.fontSize32,
-    fontFamily: THEME.typography.fontFamilyMedium,
-    paddingTop: THEME.typography.fontSize17,
+    fontSize: THEME_TYPOGRAPHY.fontSize32 as number,
+    fontFamily: THEME_TYPOGRAPHY.fontFamilyMedium as string,
+    paddingTop: THEME_TYPOGRAPHY.fontSize17 as number,
     paddingLeft: '2%',
   },
 });

@@ -23,12 +23,15 @@ export const Banner = (props: BannerProps) => {
       style={[styles.container, props.scrollY ? { height: bannerHeight } : {}]}
     >
       <Text style={styles.textTitle}>Little Lemon</Text>
-      <Text style={[styles.textTitle, styles.textSubTitle]}>Chicago</Text>
-      <View style={styles.textContainer}>
-        <Text style={styles.textRegular}>
-          We are a family owned Mediterranian restaurant focused on the
-          traditional recipes server with a modern twist We are a family owned
-        </Text>
+
+      <View style={styles.contentContainer}>
+        <View style={styles.textContainer}>
+          <Text style={[styles.textTitle, styles.textSubTitle]}>Chicago</Text>
+          <Text style={styles.textRegular}>
+            We are a family owned Mediterranian restaurant focused on the
+            traditional recipes server with a modern twist
+          </Text>
+        </View>
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
@@ -53,24 +56,31 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     alignItems: 'center',
-    flex: 0.25,
+    flex: 0.4,
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 6,
   },
   image: {
-    height: 75,
+    height: 120,
     width: '100%',
   },
-  textContainer: {
+  contentContainer: {
     alignItems: 'center',
     alignContent: 'center',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
+  textContainer: {
+    flex: 0.6,
+    alignItems: 'flex-start',
+    alignContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
   textRegular: {
-    flex: 0.75,
     color: THEME_COLORS.textWhite,
     fontFamily: THEME_TYPOGRAPHY.fontFamilyStandard as string,
     fontSize: THEME_TYPOGRAPHY.fontSize17 as number,

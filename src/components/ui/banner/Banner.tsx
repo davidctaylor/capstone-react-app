@@ -29,7 +29,7 @@ export const Banner = (props: BannerProps) => {
           <Text style={[styles.textTitle, styles.textSubTitle]}>Chicago</Text>
           <Text style={styles.textRegular}>
             We are a family owned Mediterranian restaurant focused on the
-            traditional recipes server with a modern twist
+            traditional recipes server with a modern twist.
           </Text>
         </View>
         <View style={styles.imageContainer}>

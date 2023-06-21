@@ -55,7 +55,7 @@ export const navigationOptions = (props: HeaderProps) => {
         accessibilityLabel={'Little Lemon Logo'}
       />
     ),
-    ...(props.route.name !== 'onboarding' && {
+    ...(props.route.name !== 'Onboarding' && {
       headerRight: () => (
         <TouchableOpacity
           style={[STYLE_BUTTON.button, styles.buttonAvatar]}
